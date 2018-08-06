@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     container_name: pterodactyl-daemon
     tty: true
-    port:
+    ports:
       # - 8080:8080
       - 8443:8443
       - 2022:2022
