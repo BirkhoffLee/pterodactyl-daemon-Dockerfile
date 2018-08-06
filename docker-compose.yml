@@ -4,13 +4,19 @@ services:
   daemon:
     build: .
     hostname: daemon
-    container_name: pterodactyl-daemon
-    ports:
-      - "8080:8080"
-    tty: true
     restart: unless-stopped
+    container_name: pterodactyl-daemon
+    tty: true
+    ports:
+      # - 8080:8080
+      - 8443:8443
+      - 2022:2022
+    networks:
+      - default
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/pterodactyl/:/tmp/pterodactyl
-      - ./daemon/config/:/srv/daemon/config/
-      - ./daemon-data/:/srv/daemon-data/
+      - /etc/localtime:/etc/localtime:ro
+      - /srv/daemon/config/:/srv/daemon/config/
+      - /srv/daemon-data/:/srv/daemon-data/
+      - /path/to/certs/for/example.com:/etc/letsencrypt/live/example.com:ro
