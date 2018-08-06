@@ -12,22 +12,11 @@ services:
       - 8443:8443
       - 2022:2022
     networks:
-      - traefik
       - default
-    labels:
-      - "traefik.docker.network=traefik"
-      - "traefik.enable=true"
-      - "traefik.basic.frontend.rule=Host:node-florida-us.lacunamc.com"
-      - "traefik.basic.port=8443"
-      - "traefik.basic.protocol=http"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/pterodactyl/:/tmp/pterodactyl
       - /etc/localtime:/etc/localtime:ro
       - /srv/daemon/config/:/srv/daemon/config/
       - /srv/daemon-data/:/srv/daemon-data/
-      - /home/birkhoff/traefik-certificate-extractor/certs/node-florida-us.lacunamc.com:/etc/letsencrypt/live/node-florida-us.lacunamc.com:ro
-
-networks:
-  traefik:
-    external: true
+      - /path/to/certs/for/example.com:/etc/letsencrypt/live/example.com:ro
