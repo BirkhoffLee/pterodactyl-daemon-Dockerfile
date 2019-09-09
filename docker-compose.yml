@@ -9,14 +9,28 @@ services:
     tty: true
     ports:
       # - 8080:8080
-      - 8443:8443
+      # - 8443:8443
       - 2022:2022
     networks:
+      - traefik
       - default
+    expose:
+      - 443 # compatiable with Cloudflare CDN websocket proxy
+    labels:
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.basic.frontend.rule=Host:node.example.com"
+      - "traefik.basic.port=443"
+      - "traefik.basic.protocol=http"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers
       - /tmp/pterodactyl/:/tmp/pterodactyl
       - /etc/localtime:/etc/localtime:ro
       - /srv/daemon/config/:/srv/daemon/config/
-      - /srv/daemon-data/:/srv/daemon-data/
-      - /path/to/certs/for/example.com:/etc/letsencrypt/live/example.com:ro
+      - /home/daemon-data/:/home/daemon-data/ # OVH-specific
+      # - /path/to/certs/for/example.com:/etc/letsencrypt/live/example.com:ro
+
+networks:
+    traefik:
+        external: true
