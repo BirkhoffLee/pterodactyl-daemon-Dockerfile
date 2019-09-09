@@ -1,6 +1,6 @@
 Fork of [parkervcp's image](https://github.com/parkervcp/pterodactyl-daemon-Dockerfile) with a version bump.
 
-I might change more things in the future.
+This is made compatiable with Traefik and Cloudflare CDN. Set the SSL port to 443 in the configurations, reverse proxy ON.
 
 # Fetch daemon config automatically
 ```
