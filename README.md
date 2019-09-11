@@ -26,3 +26,11 @@ https://pterodactyl.io/daemon/configuration.html#custom-network-interfaces
 },
 ```
 and run `systemctl restart docker`
+
+# Permissions
+If you happen to use OVH as well, the main storage is mounted to `/home`, so we're gonna put `daemon-data` in it.  
+So run the following as root:
+```
+$ chmod -R 0761 /home/daemon-data
+```
+So other Linux users can't read the server files, which improves security.
